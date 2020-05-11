@@ -25,7 +25,7 @@ class Post(models.Model):
         return reverse('post_detail_url', kwargs={'slug': self.slug})
 
     def get_update_url(self):
-        return reverse('tag_update_url', kwargs={'slug': self.slug})
+        return reverse('post_update_url', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -35,6 +35,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
         # return '{}'.format(self.title)
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)

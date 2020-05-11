@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.views.generic import View, ObjectUpdateMixin
+from django.views.generic import View
+
 #from django.http import HttpResponse
 
 from .models import Post, Tag
 from .utils import *
 from .forms import TagForm, PostForm
-
 
 def posts_list(request):
     #return HttpResponse('<h1>Hello world</h1>')
@@ -34,7 +34,6 @@ class PostCreate(ObjectCreateMixin, View):
     #         new_post = bound_form.save()
     #         return redirect(new_post)
     #     return render(request, 'blog/post_create.html', context={'form': bound_form})
-
 
 class PostUpdate(ObjectUpdateMixin, View):
     model = Post
@@ -66,7 +65,7 @@ class TagCreate(ObjectCreateMixin, View):
 class TagUpdate(ObjectUpdateMixin, View):
     model = Tag
     model_form = TagForm
-    template = 'blog/tag_update_form'
+    template = 'blog/tag_update_form.html'
     # def get(self, request, slug):
     #     tag = Tag.objects.get(slug__iexact=slug)
     #     bound_form = TagForm(instance=tag)

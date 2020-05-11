@@ -48,7 +48,7 @@ class ObjectUpdateMixin:
 
         if bound_form.is_valid():
             new_obj = bound_form.save()
-            return redirect(new_tag)
+            return redirect(new_obj)
         return render(request,
                       self.template,
                       context={'form': bound_form, self.model.__name__.lower(): obj})
