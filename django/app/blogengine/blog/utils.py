@@ -4,7 +4,6 @@ from django.shortcuts import render
 from .models import *
 
 
-
 class ObjectDetailMixin:
     model = None
     template = None

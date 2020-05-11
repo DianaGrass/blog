@@ -36,6 +36,11 @@ class PostCreate(ObjectCreateMixin, View):
     #     return render(request, 'blog/post_create.html', context={'form': bound_form})
 
 
+class PostUpdate(ObjectUpdateMixin, View):
+    model = Post
+    model_form = PostForm
+    template = 'blog/post_update_form.html'
+
 
 class TagDetail(ObjectDetailMixin, View):
     model = Tag
