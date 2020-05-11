@@ -1,6 +1,5 @@
 from django.db import models
 from django.shortcuts import reverse
-
 from django.utils.text import slugify
 from time import time
 
@@ -9,6 +8,7 @@ def gen_slug(s):
     # slugify - из строк генерирует слаги
     new_slug = slugify(s, allow_unicode=True)
     return new_slug + '-' + str(int(time()))
+
 
 class Post(models.Model):
     title = models.CharField(max_length=150, db_index=True)

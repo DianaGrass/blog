@@ -17,8 +17,6 @@ class TagForm(forms.ModelForm):
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-
-
     def clean_slug(self):
         new_slug = self.cleaned_data['slug'].lower()
 
@@ -42,10 +40,10 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'slug', 'body', 'tags']
 
         widgets = {
-        'title': forms.TextInput(attrs={'class': 'form-control'}),
-        'slug': forms.TextInput(attrs={'class': 'form-control'}),
-        'body': forms.Textarea(attrs={'class': 'form-control'}),
-        'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'tags': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
 
     def clean_slug(self):
