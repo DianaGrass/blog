@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <form action="{% url 'tag_delete_url' slug=tag.slug %}" method="post">
+    <form action="{{ tag.get_delete_url }}" method="post">
         {% csrf_token %}
 
         <h3>Are you sure you want to delete<b>{{ tag.title|title }}"</b>tag?</h3>
