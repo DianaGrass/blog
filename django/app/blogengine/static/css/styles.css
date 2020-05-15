@@ -6,3 +6,12 @@
     opacity: 0.3;
     padding: 15px;
 }
+
+.admin-panel:hover{
+    opasity: 1;
+}
+
+.admin-panel a {
+    display: block;
+    margin: 5px 0;
+}
