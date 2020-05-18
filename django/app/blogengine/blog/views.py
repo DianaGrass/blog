@@ -7,10 +7,9 @@ from django.views.generic import View
 from .models import Post, Tag
 from .utils import *
 from .forms import TagForm, PostForm
-
+from django.contrib.auth.mixins import LoginRequireMixin
 
 def posts_list(request):
-    #return HttpResponse('<h1>Hello world</h1>')
     posts = Post.objects.all()
     return render(request, 'blog/index.html', context={'posts': posts})
 
@@ -20,35 +19,24 @@ class PostDetail(ObjectDetailMixin, View):
     template = 'blog/post_detail.html'
 
 
-class PostCreate(ObjectCreateMixin, View):
+class PostCreate(LoginRequireMixin, ObjectCreateMixin, View):
     model_form = PostForm
     template = 'blog/post_create_form.html'
-
-    # def get(self, request):
-    #     form = PostForm()
-    #     return render(request, 'blog/post_create_form.html', context={'form': form})
-    #
-    # def post(self, request):
-    #     bound_form = PostForm(request.POST)
-    #     if bound_form.is_valid():
-    #         new_post = bound_form.save()
-    #         return redirect(new_post)
-    #     return render(request, 'blog/post_create.html', context={'form': bound_form})
+    raise_exception = True
 
 
 class PostUpdate(ObjectUpdateMixin, View):
     model = Post
     model_form = PostForm
     template = 'blog/post_update_form.html'
+    raise_exception = True
 
 
-
-class PostDelete(ObjectDeleteMixin, View):
+class PostDelete(LoginRequireMixin, ObjectDeleteMixin, View):
     model = Post
     template = 'blog/post_delete_form.html'
     redirect_url = 'posts_list_url'
-
-
+    raise_exception = True
 
 
 class TagDetail(ObjectDetailMixin, View):
@@ -56,54 +44,24 @@ class TagDetail(ObjectDetailMixin, View):
     template = 'blog/tag_detail.html'
 
 
-class TagCreate(ObjectCreateMixin, View):
+class TagCreate(LoginRequireMixin, ObjectCreateMixin, View):
     model_form = TagForm
     template = 'blog/tag_create.html'
-    # def get(self, request):
-    #     form = TagForm()
-    #     return render(request, 'blog/tag_create.html', context={'form': form})
-    #
-    # def post(self, request):
-    #     bound_form = TagForm(request.POST)
-    #
-    #     if bound_form.is_valid():
-    #         new_tag = bound_form.save()
-    #         return redirect(new_tag)
-    #     return render(request, 'blog/tag_create.html', context={'form': bound_form})
+    raise_exception = True
 
 
-class TagUpdate(ObjectUpdateMixin, View):
+class TagUpdate(LoginRequireMixin, ObjectUpdateMixin, View):
     model = Tag
     model_form = TagForm
     template = 'blog/tag_update_form.html'
-    # def get(self, request, slug):
-    #     tag = Tag.objects.get(slug__iexact=slug)
-    #     bound_form = TagForm(instance=tag)
-    #     return render(request, 'blog/tag_update_form.html', context ={'form': bound_form, 'tag': tag})
-    #
-    # def post(self, request, slug):
-    #     tag = Tag.objects.get(slug__iexact=slug)
-    #     bound_form = TagForm(request.POST, instance=tag)
-    #
-    #     if bound_form.is_valid():
-    #         new_tag = bound_form.save()
-    #         return redirect(new_tag)
-    #     return render(request, 'blog/tag_update_form', context={'form': bound_form, 'tag': tag})
+    raise_exception = True
 
 
-class TagDelete(ObjectDeleteMixin, View):
+class TagDelete(LoginRequireMixin, ObjectDeleteMixin, View):
     model = Tag
     template = 'blog/tag_delete_form.html'
     redirect_url = 'tags_list_url'
-
-    # def get(self, request, slug):
-    #     tag = Tag.objects.get(slug__iexact=slug)
-    #     return render(request, 'blog/tag_delete_form.html', context={'tag': tag})
-    #
-    # def post(self, request, slug):
-    #     tag = Tag.objects.get(slug__iexact=slug)
-    #     tag.delete()
-    #     return redirect(reverse('tags_list_url'))
+    raise_exception = True
 
 
 def tags_list(request):
