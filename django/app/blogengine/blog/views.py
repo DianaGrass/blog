@@ -7,11 +7,15 @@ from django.views.generic import View
 from .models import Post, Tag
 from .utils import *
 from .forms import TagForm, PostForm
+
 from django.contrib.auth.mixins import LoginRequireMixin
+from django.core.paginator import Paginator
 
 def posts_list(request):
     posts = Post.objects.all()
-    return render(request, 'blog/index.html', context={'posts': posts})
+    paginator = Paginator(posts,2)
+    page = paginator.get_page(1)
+    return render(request, 'blog/index.html', context={'posts': page.object_list})
 
 
 class PostDetail(ObjectDetailMixin, View):

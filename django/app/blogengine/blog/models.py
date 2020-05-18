@@ -39,6 +39,9 @@ class Post(models.Model):
         return self.title
         # return '{}'.format(self.title)
 
+    class Meta:
+        ordering = ['-date_pub']
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
@@ -57,11 +60,5 @@ class Tag(models.Model):
     def get_delete_url(self):
         return reverse('tag_delete_url', kwargs={'slug': self.slug})
 
-
-# class Tag(models.Model):
-#     title = models.CharField(max_length=50)
-#     slug = models.SlugField(default='t0', max_length=50,
-#                             unique=False, db_index=True)
-#
-#     def __str__(self):
-#         return '{}'.format(self.title)
+    class Meta:
+        ordering = ['title']
