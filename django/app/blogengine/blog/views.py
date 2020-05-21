@@ -8,8 +8,9 @@ from .models import Post, Tag
 from .utils import *
 from .forms import TagForm, PostForm
 
-from django.contrib.auth.mixins import LoginRequireMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+
 
 def posts_list(request):
     posts = Post.objects.all()
@@ -25,7 +26,7 @@ class PostDetail(ObjectDetailMixin, View):
     template = 'blog/post_detail.html'
 
 
-class PostCreate(LoginRequireMixin, ObjectCreateMixin, View):
+class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = PostForm
     template = 'blog/post_create_form.html'
     raise_exception = True
@@ -38,7 +39,7 @@ class PostUpdate(ObjectUpdateMixin, View):
     raise_exception = True
 
 
-class PostDelete(LoginRequireMixin, ObjectDeleteMixin, View):
+class PostDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     model = Post
     template = 'blog/post_delete_form.html'
     redirect_url = 'posts_list_url'
@@ -50,20 +51,20 @@ class TagDetail(ObjectDetailMixin, View):
     template = 'blog/tag_detail.html'
 
 
-class TagCreate(LoginRequireMixin, ObjectCreateMixin, View):
+class TagCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = TagForm
     template = 'blog/tag_create.html'
     raise_exception = True
 
 
-class TagUpdate(LoginRequireMixin, ObjectUpdateMixin, View):
+class TagUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Tag
     model_form = TagForm
     template = 'blog/tag_update_form.html'
     raise_exception = True
 
 
-class TagDelete(LoginRequireMixin, ObjectDeleteMixin, View):
+class TagDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     model = Tag
     template = 'blog/tag_delete_form.html'
     redirect_url = 'tags_list_url'
