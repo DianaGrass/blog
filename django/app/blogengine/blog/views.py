@@ -14,7 +14,7 @@ from django.core.paginator import Paginator
 
 def posts_list(request):
     posts = Post.objects.all()
-    paginator = Paginator(posts,2)
+    paginator = Paginator(posts,5)
     page_number = request.GET.get('page', 1)  #http://localhost:5000/blog/?page=2
     page = paginator.get_page(page_number)
 
