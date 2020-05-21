@@ -18,7 +18,7 @@ def posts_list(request):
     page_number = request.GET.get('page', 1)  #http://localhost:5000/blog/?page=2
     page = paginator.get_page(page_number)
 
-    return render(request, 'blog/index.html', context={'posts': page})
+    return render(request, 'blog/index.html', context={'page_object': page})
 
 
 class PostDetail(ObjectDetailMixin, View):
@@ -32,7 +32,7 @@ class PostCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     raise_exception = True
 
 
-class PostUpdate(ObjectUpdateMixin, View):
+class PostUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Post
     model_form = PostForm
     template = 'blog/post_update_form.html'
