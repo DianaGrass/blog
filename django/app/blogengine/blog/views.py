@@ -20,7 +20,7 @@ def posts_list(request):
 
     is_paginated = page.has_other_pages()
 
-    if page.has_other_pages():
+    if page.has_previous():
         prev_url = '?page={}'.format(page.previous_page_number())
 
     else:
