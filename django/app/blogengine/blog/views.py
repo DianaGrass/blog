@@ -13,7 +13,11 @@ from django.core.paginator import Paginator
 
 
 def posts_list(request):
-    posts = Post.objects.all()
+    search_query = request.GET.get('search', '')
+    if search_query:
+        posts = Post.objects.filter(title__icontains=search_query)
+    else:
+        posts = Post.objects.all()
     paginator = Paginator(posts,5)
     page_number = request.GET.get('page', 1)  #http://localhost:5000/blog/?page=2
     page = paginator.get_page(page_number)
